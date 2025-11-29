@@ -1,27 +1,62 @@
-﻿
-<!doctype html>
-<html lang="uk">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title> — інвестиційно‑соціальний краудфандинг</title>
-  <meta name="description" content="Платформа інвестиційно‑соціального краудфандингу для малого і середнього бізнесу та волонтерських проектів." />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<!-- saved from url=(0031)https://yurii-rouge.vercel.app/ -->
+<html lang="uk"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invest&amp;Help — інвестиційно‑соціальний краудфандинг</title>
+  <meta name="description" content="Платформа інвестиційно‑соціального краудфандингу для малого і середнього бізнесу та волонтерських проектів.">
+  <link href="./qwerty_files/css2" rel="stylesheet">
   <style>
+
     :root{
       --bg:#0f1724; --card:#071028; --accent:#22c1c3; --accent-2:#6ee7b7; --muted:#9fb0c8; --glass: rgba(255,255,255,0.03);
       --radius:14px; --maxw:1200px; --ff: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
     }
     *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:var(--ff);background:linear-gradient(180deg,#071228 0%,var(--bg) 100%);color:#eaf6f5}
-    a{color:var(--accent-2);text-decoration:none}
+    html,body{
+  height:100%;
+  margin:0;
+  font-family:var(--ff);
+  background:var(--bg);
+  color:#eaf6f5;
+}
     .wrap{max-width:var(--maxw);margin:0 auto;padding:28px}
 
     /* Header */
     header{position:sticky;top:14px;z-index:60}
     .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;backdrop-filter: blur(6px);}
     .brand{display:flex;align-items:center;gap:12px}
-    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:800;color:#042024}
+   .logo{
+  width:92px;
+  height:48px;
+  border-radius:10px;
+  background:linear-gradient(270deg,
+    #8b5cf6,   /* фіолетовий */
+    #7cffcb,   /* салатовий */
+    #3b82f6,   /* синій */
+    #22d3ee    /* блакитний */
+  );
+  background-size:400% 400%;
+  animation: logoFlow 6s ease infinite;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:22px;   /* ✅ ТЕКСТ ЗБІЛЬШЕНИЙ */
+  letter-spacing:1px;
+  color:white;
+  box-shadow:
+    0 0 8px rgba(139,92,246,0.8),
+    0 0 16px rgba(124,255,203,0.6),
+    0 0 32px rgba(34,211,238,0.4);
+}
+
+/* ✅ Анімація переливання */
+@keyframes logoFlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
     nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
     nav li{padding:8px 12px;border-radius:8px}
     nav a{font-weight:600;color:var(--muted)}
@@ -78,17 +113,57 @@
       .grid{grid-template-columns:1fr}
       .modal img{display:none}
     }
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ✅ Щоб і при наведенні теж НЕ підкреслювались */
+a:hover{
+  text-decoration: none;
+}
+
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.modal .sheet{
+  background:#071428;
+  padding:22px;
+  border-radius:16px;
+  width:100%;
+  max-width:420px;
+}
   </style>
 </head>
+<div class="modal" id="donateModal">
+  <div class="sheet">
+    <h2 id="donateTitle">Донат</h2>
+    <p id="donateDesc" style="color:var(--muted)"></p>
+
+    <input id="donateAmount" type="number" placeholder="Сума (USD)">
+
+    <div style="display:flex;gap:10px;margin-top:10px">
+      <button class="btn primary" onclick="confirmDonate()">Підтвердити</button>
+      <button class="btn" onclick="closeDonate()">Скасувати</button>
+    </div>
+  </div>
+</div>
 <body>
   <div class="wrap">
     <header>
-      <a href="https://example.com" target="_blank" class="open-site-link">Відкрити сайт</a>
-      <div class="nav">
+            <div class="nav">
         <div class="brand">
-          <div class="logo">I&amp;H</div>
+          <div class="logo">CoRise</div>
           <div>
-            <div style="font-weight:700">Invest&Help</div>
+            <div style="font-weight:700">CoRise</div>
             <div style="font-size:12px;color:var(--muted)">Краудфандинг для бізнесу та волонтерів</div>
           </div>
         </div>
@@ -123,7 +198,7 @@
 
         <div class="controls card" style="margin-top:18px;display:flex;flex-direction:column">
           <div style="display:flex;gap:10px;align-items:center">
-            <input id="q" class="search" placeholder="Пошук проєкту або ключового слова" />
+            <input id="q" class="search" placeholder="Пошук проєкту або ключового слова">
             <select id="cat">
               <option value="all">Всі категорії</option>
               <option value="business">Бізнес</option>
@@ -139,11 +214,11 @@
       <aside class="sidebar card">
         <div style="font-weight:700">Наші показники</div>
         <div class="stats" style="margin-top:12px">
-          <div class="stat"><div>Залучено</div><div style="font-weight:800">&dollar;1.2M</div></div>
+          <div class="stat"><div>Залучено</div><div style="font-weight:800">$1.2M</div></div>
           <div class="stat"><div>Проєктів</div><div style="font-weight:800">142</div></div>
           <div class="stat"><div>Інвесторів</div><div style="font-weight:800">4,820</div></div>
         </div>
-        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:14px 0" />
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:14px 0">
         <div style="font-weight:700">Переваги</div>
         <ul style="color:var(--muted);margin:8px 0 0;padding-left:18px">
           <li>Прозорість фінансування</li>
@@ -158,7 +233,49 @@
       <h2 style="margin:0">Останні проєкти</h2>
       <p style="color:var(--muted);margin:6px 0 0">Підтримайте реальні ідеї: від малого бізнесу до ініціатив допомоги.</p>
 
-      <div id="grid" class="grid"></div>
+      <div id="grid" class="grid"><div class="project card">
+          <div class="body">
+            <h3>Кав'ярня на колесах</h3>
+            <p>Мобільна кав'ярня для підтримки локальних фермерів.</p>
+            <div class="progress"><i style="width:64%"></i></div>
+            <div class="meta"><span>$3200 / $5000</span><span>business</span></div>
+          </div>
+        </div><div class="project card">
+          <div class="body">
+            <h3>Бібліотека для дітей</h3>
+            <p>Створення дитячої бібліотеки у селі.</p>
+            <div class="progress"><i style="width:90%"></i></div>
+            <div class="meta"><span>$1800 / $2000</span><span>social</span></div>
+          </div>
+        </div><div class="project card">
+          <div class="body">
+            <h3>Волонтерська допомога ЗСУ</h3>
+            <p>Закупівля спорядження та медикаментів для бійців.</p>
+            <div class="progress"><i style="width:75%"></i></div>
+            <div class="meta"><span>$7500 / $10000</span><span>volunteer</span></div>
+          </div>
+        </div><div class="project card">
+          <div class="body">
+            <h3>Еко-магазин</h3>
+            <p>Продаж екологічних товарів та локальної продукції.</p>
+            <div class="progress"><i style="width:51.24999999999999%"></i></div>
+            <div class="meta"><span>$4100 / $8000</span><span>business</span></div>
+          </div>
+        </div><div class="project card">
+          <div class="body">
+            <h3>Соціальний центр для літніх</h3>
+            <p>Простір для спілкування та допомоги літнім людям.</p>
+            <div class="progress"><i style="width:40%"></i></div>
+            <div class="meta"><span>$1200 / $3000</span><span>social</span></div>
+          </div>
+        </div><div class="project card">
+          <div class="body">
+            <h3>Допомога тваринам</h3>
+            <p>Придбання корму та медичного забезпечення для притулків.</p>
+            <div class="progress"><i style="width:62.5%"></i></div>
+            <div class="meta"><span>$2500 / $4000</span><span>volunteer</span></div>
+          </div>
+        </div></div>
     </section>
 
     <!-- HOW IT WORKS (без картинок) -->
@@ -186,9 +303,9 @@
       <h2>Запустити проєкт</h2>
       <p style="color:var(--muted)">Заповніть форму та додайте опис проєкту.</p>
       <div class="card form" style="margin-top:12px">
-        <input id="p_title" placeholder="Назва проєкту" />
+        <input id="p_title" placeholder="Назва проєкту">
         <select id="p_category"><option value="business">Бізнес</option><option value="social">Соціальний</option><option value="volunteer">Волонтерський</option></select>
-        <input id="p_goal" type="number" placeholder="Цільова сума (USD)" />
+        <input id="p_goal" type="number" placeholder="Цільова сума (USD)">
         <textarea id="p_desc" rows="5" placeholder="Короткий опис проєкту"></textarea>
         <button class="btn primary" onclick="createProject()">Опублікувати проєкт (демо)</button>
         <div style="color:var(--muted);font-size:13px;margin-top:8px">У демо проєкти зберігаються тільки у поточній сесії сторінки.</div>
@@ -237,7 +354,7 @@
     </section>
 
     <footer style="margin-top:28px;text-align:center;color:var(--muted)">
-      © <span id="y"></span> Invest&Help · Платформа демо
+      © <span id="y">2025</span> CoRise · Платформа демо
     </footer>
   </div>
 
@@ -298,7 +415,73 @@
     }
 
     document.getElementById('y').textContent = new Date().getFullYear();
-  </script>
-</body>
 
-</html>
+const grid = document.getElementById('grid');
+
+function renderProjects(list) {
+  grid.innerHTML = '';
+  list.forEach(p=>{
+    const percent = Math.min(100,(p.raised/p.goal*100));
+
+    const card = document.createElement('div');
+    card.className = 'project card';
+    card.innerHTML = `
+      <div class="body">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+
+        <div class="progress">
+          <i style="width:${percent}%"></i>
+        </div>
+
+        <div class="meta">
+          <span>$${p.raised} / $${p.goal}</span>
+          <span>${p.category}</span>
+        </div>
+
+        <button class="btn primary" style="margin-top:10px"
+          onclick="openDonate(${p.id})">
+          Задонатити
+        </button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+let currentProjectId = null;
+
+function openDonate(id){
+  currentProjectId = id;
+  const p = projects.find(x => x.id === id);
+
+  document.getElementById('donateTitle').textContent = p.title;
+  document.getElementById('donateDesc').textContent = p.desc;
+  document.getElementById('donateAmount').value = '';
+
+  document.getElementById('donateModal').style.display = 'flex';
+}
+
+function closeDonate(){
+  document.getElementById('donateModal').style.display = 'none';
+}
+
+function confirmDonate(){
+  const amount = parseFloat(document.getElementById('donateAmount').value);
+
+  if(!amount || amount <= 0){
+    alert('Введіть коректну суму!');
+    return;
+  }
+
+  const p = projects.find(x => x.id === currentProjectId);
+  p.raised += amount;
+
+  closeDonate();
+  renderProjects(projects);
+
+  alert('Дякуємо за донат! 💙 (демо)');
+}
+  </script>
+
+</body></html>
