@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)https://yurii-rouge.vercel.app/ -->
+<html lang="uk"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Invest&amp;Help — інвестиційно‑соціальний краудфандинг</title>
+  <meta name="description" content="Платформа інвестиційно‑соціального краудфандингу для малого і середнього бізнесу та волонтерських проектів.">
+  <link href="./qwerty_files/css2" rel="stylesheet">
+  <style>
+
+    :root{
+      --bg:#0f1724; --card:#071028; --accent:#22c1c3; --accent-2:#6ee7b7; --muted:#9fb0c8; --glass: rgba(255,255,255,0.03);
+      --radius:14px; --maxw:1200px; --ff: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{
+  height:100%;
+  margin:0;
+  font-family:var(--ff);
+  background:var(--bg);
+  color:#eaf6f5;
+}
+    .wrap{max-width:var(--maxw);margin:0 auto;padding:28px}
+
+    /* Header */
+    header{position:sticky;top:14px;z-index:60}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);border-radius:12px;backdrop-filter: blur(6px);}
+    .brand{display:flex;align-items:center;gap:12px}
+   .logo{
+  width:92px;
+  height:48px;
+  border-radius:10px;
+  background:linear-gradient(270deg,
+    #8b5cf6,   /* фіолетовий */
+    #7cffcb,   /* салатовий */
+    #3b82f6,   /* синій */
+    #22d3ee    /* блакитний */
+  );
+  background-size:400% 400%;
+  animation: logoFlow 6s ease infinite;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
+  font-size:22px;   /* ✅ ТЕКСТ ЗБІЛЬШЕНИЙ */
+  letter-spacing:1px;
+  color:white;
+  box-shadow:
+    0 0 8px rgba(139,92,246,0.8),
+    0 0 16px rgba(124,255,203,0.6),
+    0 0 32px rgba(34,211,238,0.4);
+}
+
+/* ✅ Анімація переливання */
+@keyframes logoFlow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+    nav ul{display:flex;gap:12px;list-style:none;margin:0;padding:0}
+    nav li{padding:8px 12px;border-radius:8px}
+    nav a{font-weight:600;color:var(--muted)}
+    .cta{padding:8px 14px;background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:10px;color:#042024;font-weight:800}
+
+    /* HERO */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;padding:40px 0}
+    .hero h1{font-size:40px;margin:0 0 12px;line-height:1.02}
+    .hero p{color:var(--muted);margin:0 0 20px}
+    .hero .actions{display:flex;gap:12px}
+    .btn{padding:10px 14px;border-radius:10px;font-weight:700;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),var(--accent-2));border:0;color:#042024}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:18px;border-radius:16px}
+
+    /* Project grid */
+    .controls{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+    .search{flex:1;min-width:200px}
+    .filters{display:flex;gap:8px}
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+    .project{border-radius:12px;overflow:hidden;background:var(--card);box-shadow:0 8px 30px rgba(2,6,23,0.6);display:flex;flex-direction:column}
+    .project img{width:100%;height:160px;object-fit:cover;display:block}
+    .project .body{padding:12px;display:flex;flex-direction:column;gap:8px}
+    .project h3{margin:0;font-size:16px}
+    .project p{margin:0;color:var(--muted);font-size:14px}
+    .progress{height:10px;background:rgba(255,255,255,0.03);border-radius:999px;overflow:hidden}
+    .progress > i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+    .meta{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-top:8px}
+
+    /* SIDEBAR */
+    .sidebar .card{padding:18px}
+    .stats{display:flex;gap:12px;flex-direction:column}
+    .stat{display:flex;justify-content:space-between;align-items:center}
+
+    /* MODAL */
+    .modal{position:fixed;inset:0;background:rgba(2,6,23,0.6);display:none;align-items:center;justify-content:center;padding:20px}
+    .modal .sheet{width:100%;max-width:900px;background:linear-gradient(180deg, #071428, #071428);border-radius:12px;padding:18px}
+    .modal .sheet .top{display:flex;gap:12px}
+    .modal img{width:48%;height:280px;object-fit:cover;border-radius:10px}
+    .modal .content{padding:12px;color:var(--muted)}
+
+    /* CREATE PROJECT */
+    .form input,.form textarea,.form select{width:100%;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;margin-bottom:10px}
+
+    /* FOOTER */
+    footer{padding:28px 0;color:var(--muted);text-align:center}
+
+    /* RESPONSIVE */
+    @media (max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:repeat(2,1fr)}
+      nav ul{display:none}
+    }
+    @media (max-width:640px){
+      .grid{grid-template-columns:1fr}
+      .modal img{display:none}
+    }
+a{
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ✅ Щоб і при наведенні теж НЕ підкреслювались */
+a:hover{
+  text-decoration: none;
+}
+
+
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.6);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
+
+.modal .sheet{
+  background:#071428;
+  padding:22px;
+  border-radius:16px;
+  width:100%;
+  max-width:420px;
+}
+  </style>
+</head>
+<div class="modal" id="donateModal">
+  <div class="sheet">
+    <h2 id="donateTitle">Донат</h2>
+    <p id="donateDesc" style="color:var(--muted)"></p>
+
+    <input id="donateAmount" type="number" placeholder="Сума (USD)">
+
+    <div style="display:flex;gap:10px;margin-top:10px">
+      <button class="btn primary" onclick="confirmDonate()">Підтвердити</button>
+      <button class="btn" onclick="closeDonate()">Скасувати</button>
+    </div>
+  </div>
+</div>
+<body>
+  <div class="wrap">
+    <header>
+            <div class="nav">
+        <div class="brand">
+          <div class="logo">CoRise</div>
+          <div>
+            <div style="font-weight:700">CoRise</div>
+            <div style="font-size:12px;color:var(--muted)">Краудфандинг для бізнесу та волонтерів</div>
+          </div>
+        </div>
+        <nav>
+          <ul>
+            <li><a href="#projects">Проєкти</a></li>
+            <li><a href="#how">Як це працює</a></li>
+            <li><a href="#about">Про нас</a></li>
+            <li><a href="#contact">Контакти</a></li>
+          </ul>
+        </nav>
+        <div style="display:flex;gap:10px;align-items:center">
+          <a class="cta" href="#create">Запустити проєкт</a>
+          <a class="btn" href="#login">Увійти</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <h1>Інвестиційно‑соціальний краудфандинг<br><span style="color:var(--accent-2)">для малого, середнього бізнесу та волонтерських ініціатив</span></h1>
+        <p>Платформа допомагає з'єднати відповідальних інвесторів, бізнес та волонтерські проєкти — прозоро, безпечно та з фокусом на соціальний ефект.</p>
+ <h2 style="margin:0">Візія</h2>
+<p>Ми створюємо платформу, яка стане місцем об’єднання людей навколо реалізації ідей, що змінюють громади, бізнес і суспільство. Це простір, де підприємці, волонтери та небайдужі громадяни можуть разом перетворювати плани на реальні проєкти. Платформа забезпечить прозорий, безпечний і зручний процес збору коштів, сприяючи довірі між авторами ініціатив і тими, хто їх підтримує. Нашою метою є формування культури взаємопідтримки та спільного розвитку — коли кожен внесок, навіть найменший, стає частиною великої зміни. Ми прагнемо, щоб ця платформа стала каталізатором для появи нових можливостей для розвитку малих та середніх бізнесів та суспільних ініціатив.</p>
+
+        <div class="actions">
+          <a class="btn primary" href="#projects">Переглянути проєкти</a>
+          <a class="btn" href="#how">Як це працює</a>
+          <a class="btn" href="#create">Запустити проєкт</a>
+        </div>
+
+        <div class="controls card" style="margin-top:18px;display:flex;flex-direction:column">
+          <div style="display:flex;gap:10px;align-items:center">
+            <input id="q" class="search" placeholder="Пошук проєкту або ключового слова">
+            <select id="cat">
+              <option value="all">Всі категорії</option>
+              <option value="business">Бізнес</option>
+              <option value="social">Соціальні</option>
+              <option value="volunteer">Волонтерські</option>
+            </select>
+            <button class="btn" onclick="applyFilter()">Фільтрувати</button>
+          </div>
+          <div style="margin-top:10px;color:var(--muted);font-size:13px">Пошук і фільтрація тут — демо. Натисніть картку, щоб відкрити деталі проєкту.</div>
+        </div>
+      </div>
+
+      <aside class="sidebar card">
+        <div style="font-weight:700">Наші показники</div>
+        <div class="stats" style="margin-top:12px">
+          <div class="stat"><div>Залучено</div><div style="font-weight:800">$1.2M</div></div>
+          <div class="stat"><div>Проєктів</div><div style="font-weight:800">142</div></div>
+          <div class="stat"><div>Інвесторів</div><div style="font-weight:800">4,820</div></div>
+        </div>
+        <hr style="border:none;border-top:1px solid rgba(255,255,255,0.03);margin:14px 0">
+        <div style="font-weight:700">Переваги</div>
+        <ul style="color:var(--muted);margin:8px 0 0;padding-left:18px">
+          <li>Прозорість фінансування</li>
+          <li>Підтримка проєктів з соціальним ефектом</li>
+          <li>Проста подача заявки</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2 style="margin:0">Останні проєкти</h2>
+      <p style="color:var(--muted);margin:6px 0 0">Підтримайте реальні ідеї: від малого бізнесу до ініціатив допомоги.</p>
+
+      <div id="grid" class="grid"><div class="project card">
+          <div class="body">
+            <h3>Кав'ярня на колесах</h3>
+            <p>Мобільна кав'ярня для підтримки локальних фермерів.</p>
+            <div class="progress"><i style="width:64%"></i></div>
+            <div class="meta"><span>$3200 / $5000</span><span>business</span></div>
+          </div>
+        </div><div class="project card">
+          <div class="body">
+            <h3>Бібліотека для дітей</h3>
+            <p>Створення дитячої бібліотеки у селі.</p>
+            <div class="progress"><i style="width:90%"></i></div>
+            <div class="meta"><span>$1800 / $2000</span><span>social</span></div>
+          </div>
+        </div><div class="project card">
+          <div class="body">
+            <h3>Волонтерська допомога ЗСУ</h3>
+            <p>Закупівля спорядження та медикаментів для бійців.</p>
+            <div class="progress"><i style="width:75%"></i></div>
+            <div class="meta"><span>$7500 / $10000</span><span>volunteer</span></div>
+          </div>
+        </div><div class="project card">
+          <div class="body">
+            <h3>Еко-магазин</h3>
+            <p>Продаж екологічних товарів та локальної продукції.</p>
+            <div class="progress"><i style="width:51.24999999999999%"></i></div>
+            <div class="meta"><span>$4100 / $8000</span><span>business</span></div>
+          </div>
+        </div><div class="project card">
+          <div class="body">
+            <h3>Соціальний центр для літніх</h3>
+            <p>Простір для спілкування та допомоги літнім людям.</p>
+            <div class="progress"><i style="width:40%"></i></div>
+            <div class="meta"><span>$1200 / $3000</span><span>social</span></div>
+          </div>
+        </div><div class="project card">
+          <div class="body">
+            <h3>Допомога тваринам</h3>
+            <p>Придбання корму та медичного забезпечення для притулків.</p>
+            <div class="progress"><i style="width:62.5%"></i></div>
+            <div class="meta"><span>$2500 / $4000</span><span>volunteer</span></div>
+          </div>
+        </div></div>
+    </section>
+
+    <!-- HOW IT WORKS (без картинок) -->
+    <section id="how" style="margin-top:26px">
+      <h2>Як це працює</h2>
+      <p style="color:var(--muted)">Три простих кроки, щоб стати інвестором або запустити проєкт.</p>
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+        <div class="card" style="flex:1;min-width:220px;padding:18px">
+          <div style="font-weight:800;font-size:18px">1. Реєструйтесь</div>
+          <div style="color:var(--muted);margin-top:8px">Створіть акаунт як інвестор або автор проєкту.</div>
+        </div>
+        <div class="card" style="flex:1;min-width:220px;padding:18px">
+          <div style="font-weight:800;font-size:18px">2. Подайте проєкт</div>
+          <div style="color:var(--muted);margin-top:8px">Опишіть ціль, бюджет та соціальний ефект — ми допоможемо з модерацією.</div>
+        </div>
+        <div class="card" style="flex:1;min-width:220px;padding:18px">
+          <div style="font-weight:800;font-size:18px">3. Залучайте інвестиції</div>
+          <div style="color:var(--muted);margin-top:8px">Інвестори обирають проєкти — кошти зараховуються ескроу до досягнення мети.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CREATE PROJECT (без картинок) -->
+    <section id="create" style="margin-top:26px">
+      <h2>Запустити проєкт</h2>
+      <p style="color:var(--muted)">Заповніть форму та додайте опис проєкту.</p>
+      <div class="card form" style="margin-top:12px">
+        <input id="p_title" placeholder="Назва проєкту">
+        <select id="p_category"><option value="business">Бізнес</option><option value="social">Соціальний</option><option value="volunteer">Волонтерський</option></select>
+        <input id="p_goal" type="number" placeholder="Цільова сума (USD)">
+        <textarea id="p_desc" rows="5" placeholder="Короткий опис проєкту"></textarea>
+        <button class="btn primary" onclick="createProject()">Опублікувати проєкт (демо)</button>
+        <div style="color:var(--muted);font-size:13px;margin-top:8px">У демо проєкти зберігаються тільки у поточній сесії сторінки.</div>
+      </div>
+    </section>
+
+    <!-- ABOUT (без картинок) -->
+    <section id="about" style="margin-top:26px">
+      <h2>Про нас</h2>
+      <p style="color:var(--muted)">Платформа створена для підтримки малого бізнесу і волонтерських ініціатив. Ми забезпечуємо прозорість, модерацію та допомогу у підготовці проєктів до залучення коштів.</p>
+
+      <div style="display:flex;gap:12px;margin-top:12px;flex-wrap:wrap">
+        <div class="card" style="flex:1;min-width:200px;padding:18px">
+          <div style="font-weight:700">Місія</div>
+          <div style="color:var(--muted);margin-top:8px">Створювати можливості для сталого розвитку та допомоги через інвестиції.</div>
+        </div>
+        <div class="card" style="flex:1;min-width:200px;padding:18px">
+          <div style="font-weight:700">Прозорість</div>
+          <div style="color:var(--muted);margin-top:8px">Кошти зберігаються на ескроу. Ми публікуємо звіти та оновлення проєктів.</div>
+        </div>
+        <div class="card" style="flex:1;min-width:200px;padding:18px">
+          <div style="font-weight:700">Підтримка</div>
+          <div style="color:var(--muted);margin-top:8px">Менторство для авторів проєктів та консалтинг у складанні бізнес-плану.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT (без картинок) -->
+    <section id="contact" style="margin-top:26px">
+      <h2>Контакти</h2>
+      <p style="color:var(--muted)">Пишіть нам — відповімо протягом 48 годин.</p>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:12px">
+        <div class="card" style="flex:1;min-width:260px;padding:18px">
+          <div style="font-weight:700">Підтримка</div>
+          <div style="color:var(--muted);margin-top:8px">support@investhelp.example</div>
+        </div>
+        <div class="card" style="flex:1;min-width:260px;padding:18px">
+          <div style="font-weight:700">Офіс</div>
+          <div style="color:var(--muted);margin-top:8px">Київ, Україна</div>
+        </div>
+        <div class="card" style="flex:1;min-width:260px;padding:18px">
+          <div style="font-weight:700">Телефон</div>
+          <div style="color:var(--muted);margin-top:8px">+380 44 123 45 67</div>
+        </div>
+      </div>
+    </section>
+
+    <footer style="margin-top:28px;text-align:center;color:var(--muted)">
+      © <span id="y">2025</span> CoRise · Платформа демо
+    </footer>
+  </div>
+
+  <script>
+ // Demo projects
+    const projects = [
+      {id:1,title:'Кав\'ярня на колесах',category:'business',goal:5000,raised:3200,desc:'Мобільна кав\'ярня для підтримки локальних фермерів.'},
+      {id:2,title:'Бібліотека для дітей',category:'social',goal:2000,raised:1800,desc:'Створення дитячої бібліотеки у селі.'},
+      {id:3,title:'Волонтерська допомога ЗСУ',category:'volunteer',goal:10000,raised:7500,desc:'Закупівля спорядження та медикаментів для бійців.'},
+      {id:4,title:'Еко-магазин',category:'business',goal:8000,raised:4100,desc:'Продаж екологічних товарів та локальної продукції.'},
+      {id:5,title:'Соціальний центр для літніх',category:'social',goal:3000,raised:1200,desc:'Простір для спілкування та допомоги літнім людям.'},
+      {id:6,title:'Допомога тваринам',category:'volunteer',goal:4000,raised:2500,desc:'Придбання корму та медичного забезпечення для притулків.'}
+    ];
+
+    const grid = document.getElementById('grid');
+
+    function renderProjects(list) {
+      grid.innerHTML = '';
+      list.forEach(p=>{
+        const card = document.createElement('div');
+        card.className = 'project card';
+        card.innerHTML = `
+          <div class="body">
+            <h3>${p.title}</h3>
+            <p>${p.desc}</p>
+            <div class="progress"><i style="width:${Math.min(100,(p.raised/p.goal*100))}%"></i></div>
+            <div class="meta"><span>&dollar;${p.raised} / &dollar;${p.goal}</span><span>${p.category}</span></div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    renderProjects(projects);
+
+    function applyFilter() {
+      const q = document.getElementById('q').value.toLowerCase();
+      const cat = document.getElementById('cat').value;
+      const filtered = projects.filter(p=>{
+        return (p.title.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q)) && (cat==='all' || p.category===cat);
+      });
+      renderProjects(filtered);
+    }
+
+    function createProject() {
+      const title = document.getElementById('p_title').value;
+      const category = document.getElementById('p_category').value;
+      const goal = parseFloat(document.getElementById('p_goal').value) || 0;
+      const desc = document.getElementById('p_desc').value;
+      if(!title || !desc || goal<=0){alert('Будь ласка, заповніть усі поля коректно.'); return;}
+      const newProj = {id:projects.length+1,title,category,goal,raised:0,desc};
+      projects.push(newProj);
+      renderProjects(projects);
+      alert('Проєкт додано (демо).');
+      document.getElementById('p_title').value=''; 
+      document.getElementById('p_goal').value=''; 
+      document.getElementById('p_desc').value='';
+    }
+
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+const grid = document.getElementById('grid');
+
+function renderProjects(list) {
+  grid.innerHTML = '';
+  list.forEach(p=>{
+    const percent = Math.min(100,(p.raised/p.goal*100));
+
+    const card = document.createElement('div');
+    card.className = 'project card';
+    card.innerHTML = `
+      <div class="body">
+        <h3>${p.title}</h3>
+        <p>${p.desc}</p>
+
+        <div class="progress">
+          <i style="width:${percent}%"></i>
+        </div>
+
+        <div class="meta">
+          <span>$${p.raised} / $${p.goal}</span>
+          <span>${p.category}</span>
+        </div>
+
+        <button class="btn primary" style="margin-top:10px"
+          onclick="openDonate(${p.id})">
+          Задонатити
+        </button>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+let currentProjectId = null;
+
+function openDonate(id){
+  currentProjectId = id;
+  const p = projects.find(x => x.id === id);
+
+  document.getElementById('donateTitle').textContent = p.title;
+  document.getElementById('donateDesc').textContent = p.desc;
+  document.getElementById('donateAmount').value = '';
+
+  document.getElementById('donateModal').style.display = 'flex';
+}
+
+function closeDonate(){
+  document.getElementById('donateModal').style.display = 'none';
+}
+
+function confirmDonate(){
+  const amount = parseFloat(document.getElementById('donateAmount').value);
+
+  if(!amount || amount <= 0){
+    alert('Введіть коректну суму!');
+    return;
+  }
+
+  const p = projects.find(x => x.id === currentProjectId);
+  p.raised += amount;
+
+  closeDonate();
+  renderProjects(projects);
+
+  alert('Дякуємо за донат! 💙 (демо)');
+}
+  </script>
+
+</body></html>
